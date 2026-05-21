@@ -10,16 +10,17 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:4200',
-    process.env.CLIENT_URL
+    'https://employee-management-frontend-ivory-ten.vercel.app'
   ],
   credentials: true
 }));
+
 app.use(express.json());
 
 app.use('/api/employees', employeeRoutes);
 app.use('/api/auth', authRoutes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
