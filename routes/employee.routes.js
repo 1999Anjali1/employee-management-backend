@@ -5,6 +5,7 @@ const {
   getAllEmployees,
   getEmployeeById,
   createEmployee,
+  getDepartments,
   updateEmployee,
   deleteEmployee
 } = require('../controllers/employee.controller');
@@ -12,6 +13,7 @@ const {
 router.use(authMiddleware);
 
 router.get('/', getAllEmployees);
+router.get('/departments', getDepartments);
 router.get('/:id', getEmployeeById);
 router.post('/', createEmployee);
 router.put('/:id', updateEmployee);
