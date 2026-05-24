@@ -1,50 +1,74 @@
-🏢 EMS Suite — Employee Management System (Backend)
+# 🏢 EMS Suite — Employee Management System (Backend)
 
-A RESTful backend API for the EMS Suite Employee Management System, built with Node.js + Express and PostgreSQL (Neon), featuring JWT authentication, email-based password reset, and AI-powered HR endpoints using Groq AI.
-🌐 Live API: https://employee-management-backend-lms2.onrender.com
+![Node.js](https://img.shields.io/badge/Node.js-22.x-green?style=flat&logo=nodedotjs)
+![Express](https://img.shields.io/badge/Express-4.x-black?style=flat&logo=express)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Neon-blue?style=flat&logo=postgresql)
+![Render](https://img.shields.io/badge/Deployed-Render-purple?style=flat&logo=render)
 
-✨ Features
-Core API
+A RESTful backend API for the EMS Suite Employee Management System, built with **Node.js + Express** and **PostgreSQL (Neon)**, featuring **JWT authentication**, **email-based password reset**, and **AI-powered HR endpoints** using Groq AI.
 
-🔐 JWT Authentication — Register, login, token-based auth
-📧 Email Password Reset — Real email via Gmail SMTP + secure token
-👥 Employee CRUD — Full Create, Read, Update, Delete operations
-🏢 Department API — Dynamic department listing from database
-❤️ Health Check — Uptime monitoring endpoint
+🌐 **Live API:** [https://employee-management-backend-lms2.onrender.com](https://employee-management-backend-lms2.onrender.com)  
+🎨 **Frontend Repo:** [employee-management-frontend](https://github.com/1999Anjali1/employee-management-frontend)
 
-AI-Powered Endpoints 🤖
+---
 
-AI HR Chatbot — Natural language Q&A about workforce data
-AI Salary Suggestion — Intelligent salary recommendations
-AI Employee Insights — Comprehensive employee analysis
-AI Resume Parser — PDF resume parsing and data extraction
+## ✨ Features
 
+### Core API
+- 🔐 **JWT Authentication** — Register, login, token-based auth
+- 📧 **Email Password Reset** — Real email via Gmail SMTP + secure token
+- 👥 **Employee CRUD** — Full Create, Read, Update, Delete operations
+- 🏢 **Department API** — Dynamic department listing from database
+- ❤️ **Health Check** — Uptime monitoring endpoint
 
-🛠️ Tech Stack
-LayerTechnologyRuntimeNode.js v22FrameworkExpress.jsDatabasePostgreSQL (Neon Cloud)AuthenticationJWT + bcryptjsEmailNodemailer + Gmail SMTPAIGroq API (LLaMA 3.3 70B)PDF Parsingpdf-parseFile UploadmulterDeploymentRender
+### AI-Powered Endpoints 🤖
+- **AI HR Chatbot** — Natural language Q&A about workforce data
+- **AI Salary Suggestion** — Intelligent salary recommendations
+- **AI Employee Insights** — Comprehensive employee analysis
+- **AI Resume Parser** — PDF resume parsing and data extraction
 
-🚀 Getting Started
-Prerequisites
+---
 
-Node.js v18+
-PostgreSQL database (local or Neon)
+## 🛠️ Tech Stack
 
-Installation
-bash# Clone the repository
+| Layer | Technology | Version |
+|---|---|---|
+| Runtime | Node.js | 22.x |
+| Framework | Express.js | 4.x |
+| Database | PostgreSQL (Neon Cloud) | Latest |
+| Authentication | JWT + bcryptjs | 9.x / 2.x |
+| Email | Nodemailer + Gmail SMTP | 6.x |
+| AI | Groq API (LLaMA 3.3 70B) | Latest |
+| PDF Parsing | pdf-parse | 1.1.1 |
+| File Upload | multer | 1.x |
+| Deployment | Render | - |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js v18+
+- PostgreSQL database (local or Neon)
+
+### Installation
+
+```bash
+# Clone the repository
 git clone https://github.com/1999Anjali1/employee-management-backend.git
-
-# Navigate to backend
 cd employee-management-backend
-
-# Install dependencies
 npm install
-
-# Start development server
 npm run dev
+```
 
-⚙️ Environment Variables
-Create a .env file in the root directory:
-env# Database
+---
+
+## ⚙️ Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+# Database
 DATABASE_URL=your_postgresql_connection_string
 
 # Server
@@ -62,39 +86,77 @@ CLIENT_URL=http://localhost:4200
 
 # AI
 GROQ_API_KEY=your_groq_api_key
+```
 
-📁 Project Structure
+> ⚠️ Never commit `.env` to GitHub — it's in `.gitignore`
+
+---
+
+## 📁 Project Structure
 backend/
 ├── config/
-│   └── db.js                    # PostgreSQL connection pool
+│   └── db.js                    # PostgreSQL connection pool (Neon)
 ├── controllers/
 │   ├── employee.controller.js   # Employee CRUD logic
-│   └── auth.controller.js       # Auth logic (register/login/reset)
+│   └── auth.controller.js       # Register, login, forgot/reset password
 ├── middleware/
-│   ├── auth.middleware.js        # JWT verification
-│   └── upload.middleware.js      # Multer file upload config
+│   ├── auth.middleware.js        # JWT token verification
+│   └── upload.middleware.js      # Multer PDF upload config
 ├── routes/
 │   ├── employee.routes.js        # /api/employees
 │   ├── auth.routes.js            # /api/auth
-│   └── ai.routes.js              # /api/ai
-└── index.js                      # Express app entry point
+│   └── ai.routes.js              # /api/ai (all AI endpoints)
+└── index.js                      # Express app + CORS + route registration
 
-📡 API Endpoints
-Auth Routes /api/auth
-MethodEndpointDescriptionPOST/registerRegister new userPOST/loginLogin and get JWT tokenPOST/forgot-passwordSend password reset emailPOST/reset-passwordReset password with tokenPOST/change-passwordChange password from profile
-Employee Routes /api/employees 🔒
-MethodEndpointDescriptionGET/Get all employeesGET/:idGet employee by IDPOST/Create new employeePUT/:idUpdate employeeDELETE/:idDelete employeeGET/departmentsGet unique departments
-AI Routes /api/ai 🔒 🤖
-MethodEndpointDescriptionPOST/chatHR chatbot Q&APOST/salary-suggestionAI salary recommendationPOST/employee-insightsAI employee analysisPOST/parse-resumeAI PDF resume parser
-Health Check
-MethodEndpointDescriptionGET/api/healthServer health status
+---
 
-🔒 = Requires JWT Authorization header
+## 📡 API Endpoints
 
+### Auth Routes `/api/auth`
 
-🗄️ Database Schema
-employees table
-sqlCREATE TABLE employees (
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/register` | Register new user (bcrypt hashed password) |
+| POST | `/login` | Login → returns JWT token |
+| POST | `/forgot-password` | Send reset email with secure token |
+| POST | `/reset-password` | Reset password using email token |
+| POST | `/change-password` | Change password from profile page |
+
+### Employee Routes `/api/employees` 🔒
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/` | Get all employees (ordered by created_at DESC) |
+| GET | `/:id` | Get single employee by ID |
+| POST | `/` | Create new employee |
+| PUT | `/:id` | Update employee details |
+| DELETE | `/:id` | Delete employee |
+| GET | `/departments` | Get distinct department names from DB |
+
+### AI Routes `/api/ai` 🔒 🤖
+
+| Method | Endpoint | Body | Description |
+|---|---|---|---|
+| POST | `/chat` | `{message, employeeData}` | HR chatbot Q&A |
+| POST | `/salary-suggestion` | `{department, position, employeeData}` | AI salary range |
+| POST | `/employee-insights` | `{employee, allEmployees}` | Full AI analysis |
+| POST | `/parse-resume` | `FormData (PDF)` | Parse resume → JSON |
+
+### Utility
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/health` | Health check → `{status: "ok", timestamp}` |
+
+> 🔒 = Requires `Authorization: Bearer <token>` header
+
+---
+
+## 🗄️ Database Schema
+
+### employees
+```sql
+CREATE TABLE employees (
   id SERIAL PRIMARY KEY,
   first_name VARCHAR(100) NOT NULL,
   last_name VARCHAR(100) NOT NULL,
@@ -106,8 +168,11 @@ sqlCREATE TABLE employees (
   hire_date DATE,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-users table
-sqlCREATE TABLE users (
+```
+
+### users
+```sql
+CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
   email VARCHAR(150) UNIQUE NOT NULL,
@@ -116,24 +181,32 @@ sqlCREATE TABLE users (
   reset_token_expiry TIMESTAMP,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+```
 
-🤖 AI Integration
-All AI features use Groq API with LLaMA 3.3 70B model:
-Chatbot Privacy Rules
+---
 
-Individual salaries are never revealed
-Personal contact details are protected
-Only aggregate/department-level data is shared
+## 🤖 AI Integration
 
-Resume Parser
+All AI features use **Groq API** with **LLaMA 3.3 70B** model for fast, free inference.
 
-Extracts: name, email, phone, position, department
-Uses PDF text extraction + AI parsing
-Returns structured JSON for form auto-fill
+### Chatbot Privacy Rules
+- Individual salaries are **never revealed**
+- Personal contact details are **protected**
+- Only aggregate/department-level salary data is shared
 
+### Resume Parser Flow
+1. Multer stores uploaded PDF in memory buffer
+2. pdf-parse extracts plain text from buffer
+3. First 3000 chars sent to Groq AI with extraction prompt
+4. AI returns structured JSON
+5. Frontend auto-fills employee form
 
-📦 Key Dependencies
-json{
+---
+
+## 📦 Key Dependencies
+
+```json
+{
   "express": "^4.x",
   "pg": "^8.x",
   "bcryptjs": "^2.x",
@@ -144,17 +217,17 @@ json{
   "cors": "^2.x",
   "dotenv": "^16.x"
 }
+```
 
-🔗 Related Repositories
+---
 
-🎨 Frontend: employee-management-frontend
+## 👩‍💻 Author
 
+**Anjali P**
+- GitHub: [@1999Anjali1](https://github.com/1999Anjali1)
 
-👩‍💻 Author
-Anjali P
+---
 
-GitHub: @1999Anjali1
+## 📄 License
 
-
-📄 License
-This project is open source and available under the MIT License.
+This project is open source and available under the [MIT License](LICENSE).
